@@ -27,10 +27,10 @@ let read path =
         { Label = numbers.[0]
           Pixels = numbers.[1..] })
 
-let trainingPath = @"Dojo\trainingsample.csv"
+let trainingPath = @"..\Dojo\trainingsample.csv"
 let trainingData = read trainingPath
 let basicModel = train trainingData
-let validationPath = @"Dojo\validationsample.csv"
+let validationPath = @"..\Dojo\validationsample.csv"
 let validationData = read validationPath
 
 let evaluate (model:Model) =
@@ -41,6 +41,11 @@ let evaluate (model:Model) =
     |> Array.average
 
 evaluate basicModel
+
+let report o =
+    printfn "Actual: %d" o.Label
+    printfn "Predicted: %d" (basicModel o.Pixels)
+    o.Pixels |> prettyPrint
 
 // If you want to go further...
 // * Try out 1, 2, .. n neighbors?

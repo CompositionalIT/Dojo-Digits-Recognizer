@@ -10,5 +10,6 @@ let prettyPrint (observation:int []) =
     observation
     |> Array.map printValue
     |> Array.chunkBySize 28
+    |> Array.filter(Array.forall ((=) ' ') >> not)
     |> Array.map System.String
     |> Array.iter (printfn "%s")
